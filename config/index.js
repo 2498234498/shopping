@@ -3,14 +3,23 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
 
 const path = require('path')
-
+const ENV = Object.is(process.env.NODE_ENV, 'production') ? require('./prod.env') : require('./dev.env')
+const trim = (str = '') => str.replace(/"/g, '')
 module.exports = {
   dev: {
 
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: { // 跨域请求代理
+      [`${trim(ENV.BASE_URL)}/**`]: {
+        target: trim(ENV.ACTUAL_URL),
+        changeOrigin: true,
+        pathRewrite: { // 路径重写
+          [`^${trim(ENV.BASE_URL)}`]: '/'
+        }
+      }
+    },
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST

@@ -3,9 +3,11 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import api from './api'
 
 import './style/reset.css'
 
+Vue.prototype.$api = api
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

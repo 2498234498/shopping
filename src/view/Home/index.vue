@@ -4,6 +4,9 @@
 
 <script>
 export default {
-  name: 'home'
+  name: 'home',
+  created () {
+    // this.$api.text()
+  }
 }
 </script>
